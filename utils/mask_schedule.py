@@ -40,3 +40,16 @@ class WarmScheduleLinear:
         if epoch >= self.starte and epoch < self.ende:
             return self.endr * (epoch-self.starte)/float(self.ende-self.starte)
         return self.endr
+
+
+class MileStone:
+    def __init__(self,miles_stones,values):
+        assert len(miles_stones) == len(values)-1
+        self.milestone = miles_stones
+        self.values = values
+
+    def __call__(self,epoch):
+        for i,st in enumerate(self.milestone):
+            if epoch <= st:
+                return self.values[i]
+        return self.values[-1]
